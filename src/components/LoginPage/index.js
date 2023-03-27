@@ -29,7 +29,6 @@ class LoginPage extends Component {
   }
 
   onSubmitFailure = errorMsg => {
-    console.log(errorMsg.Firebase)
     this.setState({showErrorMsg: true, errorMsg})
   }
 
@@ -38,12 +37,7 @@ class LoginPage extends Component {
     try {
       const {history} = this.props
       const {userEmail, password} = this.state
-      const response = await signInWithEmailAndPassword(
-        auth,
-        userEmail,
-        password,
-      )
-      console.log(response.user)
+      await signInWithEmailAndPassword(auth, userEmail, password)
       history.replace('/')
     } catch (e) {
       this.onSubmitFailure(e.message)
